@@ -1,5 +1,7 @@
 const express = require('express');
 const authRoutes = require('./routes/authRoutes');
+const categoriesRoutes = require('./routes/categoriesRoutes');
+const productsRoutes = require('./routes/productsRoutes');
 const installRoute = require('./routes/installRoute');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
@@ -10,7 +12,9 @@ require('dotenv').config();
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/categories', categoriesRoutes);
 app.use('/api/install', installRoute);
+app.use('/api/products', productsRoutes);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

@@ -89,4 +89,63 @@ router.get('/:id', productsController.getProduct);
  */
 router.post('/', authMiddleware, productsController.createProduct);
 
+/**
+ * @swagger
+ * /products/{id}:
+ *   put:
+ *     summary: Atualiza um produto existente
+ *     tags: [Produtos]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               categoryId:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Produto atualizado
+ *       404:
+ *         description: Produto não encontrado
+ */
+router.put('/:id', authMiddleware, productsController.updateProduct);
+
+/**
+ * @swagger
+ * /products/{id}:
+ *   delete:
+ *     summary: Exclui um produto pelo ID
+ *     tags: [Produtos]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Produto excluído
+ *       404:
+ *         description: Produto não encontrado
+ */
+router.delete('/:id', authMiddleware, productsController.deleteProduct);
+
 module.exports = router;

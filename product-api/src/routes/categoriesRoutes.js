@@ -85,4 +85,59 @@ router.get('/:id', categoriesController.getCategory);
  */
 router.post('/', authMiddleware, categoriesController.createCategory);
 
+/**
+ * @swagger
+ * /categories/{id}:
+ *   put:
+ *     summary: Atualiza uma categoria existente
+ *     tags: [Categorias]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Categoria atualizada
+ *       404:
+ *         description: Categoria não encontrada
+ */
+router.put('/:id', authMiddleware, categoriesController.updateCategory);
+
+/**
+ * @swagger
+ * /categories/{id}:
+ *   delete:
+ *     summary: Exclui uma categoria pelo ID
+ *     tags: [Categorias]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Categoria excluída
+ *       404:
+ *         description: Categoria não encontrada
+ */
+router.delete('/:id', authMiddleware, categoriesController.deleteCategory);
+
 module.exports = router;
